@@ -6,7 +6,10 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const randomIDGenerator = require('./randomIDGenerator');
-app.use(bodyParser.json({limit: '1000mb'}));
+app.use(bodyParser.text({
+    type: "application/json",
+    limit: "1000mb"
+}));
 app.use(cors());
 
 app.post('/putData',  (request, response) => {
@@ -25,7 +28,7 @@ app.get("/getData",(request, response) => {
     AllowOrigin(response);
     require('./getData')(request, response, storage);
 });
-app.listen(2222);
+app.listen(2223);
 
 function AllowOrigin(response) {
     response.header('Access-Control-Allow-Origin', '*');
