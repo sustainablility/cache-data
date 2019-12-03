@@ -3,11 +3,12 @@ const randomIDGenerator = require('./randomIDGenerator');
 
 
 async function putData(request, response, storage) {
-    if (request.body.url === undefined || request.body.method === undefined) {
+    let dataInfo = JSON.parse(request.body);
+    if (dataInfo.url === undefined || dataInfo.method === undefined) {
         response.status(400).send("Lack of parameters");
         return null;
     }
-    let url = request.body.url;
+    let url = dataInfo.url;
     let dataFromURL = await reqServer(url).catch(err => {
         response.send("Error")
     });
